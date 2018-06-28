@@ -1,0 +1,97 @@
+<!-- this is wirtten by my own -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BreakOut</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    canvas {
+      background: #eee;
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="myCanvas" width="480" height="320"></canvas>
+  <script>
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+    var x = 10;
+    var y = 10;
+    var dx = 2;
+    var dy = 2;
+    var color = "#0095DD";
+    var circleRadis = 10;
+    var paddleWidth = 80;
+    var paddleHeight = 10;
+    var rightPressed = false;
+    var leftPressed = false;
+    var paddleX = (canvas.width-paddleWidth)/2;
+
+    document.addEventListener("keyup", keyUpHandler, false);
+    document.addEventListener("keydown", keyDownHandler, false);
+
+    function keyUpHandler(e) {
+      if(e.keyCode == 37) {
+        leftPressed = false;
+      } else if (e.keyCode == 39) {
+        rightPressed = false;
+      }
+    }
+
+    function keyDownHandler(e) {
+      if(e.keyCode == 37) {
+        leftPressed = true;
+      } else if (e.keyCode == 39) {
+        rightPressed = true;
+      }
+    }
+
+    function drawBall() {
+      ctx.beginPath();
+      ctx.arc(x, y, circleRadis, 0, Math.PI*2);
+      ctx.fillStyle = color;
+      ctx.fill();
+      ctx.closePath();
+    }
+
+    function drawPaddle() {
+      ctx.beginPath();
+      ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
+      ctx.fillStyle = color;
+      ctx.fill();
+      ctx.closePath();
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (x+dx < circleRadis|| x+dx > canvas.width-circleRadis) {
+        dx = -dx;
+      }
+
+      if (y+dy < circleRadis|| y+dy > canvas.height-circleRadis) {
+        dy = -dy;
+      }
+
+      if (leftPressed && paddleX> 0) {
+        paddleX -=7;
+      } else if(rightPressed && paddleX < canvas.width-paddleWidth){
+        paddleX +=7;
+      }
+      console.log("x is "+x+" y is "+y);
+      drawBall();
+      drawPaddle();
+      x += dx;
+      y += dy;
+    }
+
+    setInterval(draw, 50);
+
+  </script>
+</body>
+</html>
