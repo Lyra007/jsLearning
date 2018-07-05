@@ -1,13 +1,14 @@
 import React from 'react';
-import {Routehandler} from 'react-router';
+import {RouteHandler} from 'react-router';
 
 class App extends React.Component {
   render() {
     return (
       <div>
-      <Routehandler/>
+        <RouteHandler />
       </div>
     );
   }
 }
+
 export default App;
