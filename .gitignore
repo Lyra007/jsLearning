@@ -4,5 +4,4 @@
 **/._.DS_Store
 **/node_modules/**
 **/bower_components/
-**/public/js/bundle.js
-**/public/js/vendor.bundle.js
+**/public/
